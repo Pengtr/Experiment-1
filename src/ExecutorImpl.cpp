@@ -15,6 +15,8 @@ namespace adas
             if (cmd == 'M') {
                 if (pose.heading == 'E') {
                     ++pose.x;
+                } else if (pose.heading == 'W') {
+                    --pose.x;
                 }
             }
         }
