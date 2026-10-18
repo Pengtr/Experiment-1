@@ -19,6 +19,8 @@ namespace adas
                     --pose.x;
                 } else if (pose.heading == 'N') {
                     ++pose.y;
+                } else if (pose.heading == 'S') {
+                    --pose.y;
                 }
             }
         }
