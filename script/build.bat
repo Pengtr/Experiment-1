@@ -1,12 +1,22 @@
 @echo off
-pushd .
+setlocal
+pushd "%~dp0.."
 
 if not exist build (
-     md build
+    md build
 )
 
-cd build
-cmake -G"MinGW Makefiles" ..
-mingw32-make.exe
+cmake -S . -B build -G Ninja
+if errorlevel 1 (
+    popd
+    exit /b 1
+)
+
+cmake --build build
+if errorlevel 1 (
+    popd
+    exit /b 1
+)
 
 popd
+exit /b 0

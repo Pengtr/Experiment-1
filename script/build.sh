@@ -1,8 +1,7 @@
 #!/bin/bash
+set -e
+cd "$(dirname "$0")/.."
 
 bash script/clean.sh
-mkdir -p build
-
-cd build
-cmake -G"Unix Makefiles" ..
-make
+cmake -S . -B build -G Ninja
+cmake --build build

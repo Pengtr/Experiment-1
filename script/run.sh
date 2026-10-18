@@ -1,11 +1,10 @@
 #!/bin/bash
+set -e
+cd "$(dirname "$0")/.."
 
-if [ ! -f "build/tests/training_main" ]; then 
-	echo "training_main not exists!"
-	
-	exit 0
+if [ ! -f "build/tests/training_main.exe" ]; then
+    echo "training_main.exe not exists!"
+    exit 1
 fi
 
-cd build/tests
-
-./training_main
+./build/tests/training_main.exe

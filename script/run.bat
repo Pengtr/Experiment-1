@@ -1,14 +1,17 @@
 @echo off
-pushd .
+setlocal
+pushd "%~dp0.."
 
-if not exist build/tests/training_main.exe (
-	echo "training_main.exe not exists!"
-	popd
-	exit(1)
+if not exist build\tests\training_main.exe (
+    echo training_main.exe not exists!
+    popd
+    exit /b 1
 )
 
-cd build/tests
-
-training_main.exe
+pushd build\tests
+.\training_main.exe
+set "RC=%errorlevel%"
+popd
 
 popd
+exit /b %RC%

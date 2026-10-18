@@ -1,11 +1,10 @@
 @echo off
-pushd .
+setlocal
+pushd "%~dp0.."
 
-if not exist build (
-    md build
+if exist build (
+    cmake --build build --target clean
 )
 
-cd build
-mingw32-make.exe clean
-
 popd
+exit /b 0
