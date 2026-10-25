@@ -53,7 +53,8 @@ namespace adas
                 std::unique_ptr<MoveCommand> cmder = std::make_unique<MoveCommand>();
                 cmder->DoOperate(*this);
             } else if (cmd == 'L') {
-                TurnLeft();
+                std::unique_ptr<TurnLeftCommand> cmder = std::make_unique<TurnLeftCommand>();
+                cmder->DoOperate(*this);
             } else if (cmd == 'R') {
                 TurnRight();
             }
