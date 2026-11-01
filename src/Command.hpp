@@ -1,54 +1,58 @@
 #pragma once
-#include <functional>
 #include "PoseHandler.hpp"
 namespace adas
 {
 class MoveCommand final
 {
 public:
-    const std::function<void(PoseHandler&)> operate = [](PoseHandler& poseHandler) noexcept {
+    void operator()(PoseHandler& poseHandler) const noexcept
+    {
         if (poseHandler.IsFast()) {
             poseHandler.Move();
         }
         poseHandler.Move();
-    };
+    }
 };
 
 class TurnLeftCommand final
 {
 public:
-    const std::function<void(PoseHandler&)> operate = [](PoseHandler& poseHandler) noexcept {
+    void operator()(PoseHandler& poseHandler) const noexcept
+    {
         if (poseHandler.IsFast()) {
             poseHandler.Move();
         }
         poseHandler.TurnLeft();
-    };
+    }
 };
 
 class TurnRightCommand final
 {
 public:
-    const std::function<void(PoseHandler&)> operate = [](PoseHandler& poseHandler) noexcept {
+    void operator()(PoseHandler& poseHandler) const noexcept
+    {
         if (poseHandler.IsFast()) {
             poseHandler.Move();
         }
         poseHandler.TurnRight();
-    };
+    }
 };
 
 class FastCommand final
 {
 public:
-    const std::function<void(PoseHandler&)> operate = [](PoseHandler& poseHandler) noexcept {
+    void operator()(PoseHandler& poseHandler) const noexcept
+    {
         poseHandler.Fast();
-    };
+    }
 };
 
 class ReverseCommand final
 {
 public:
-    const std::function<void(PoseHandler&)> operate = [](PoseHandler& poseHandler) noexcept {
+    void operator()(PoseHandler& poseHandler) const noexcept
+    {
         poseHandler.Reverse();
-    };
+    }
 };
 }  // namespace adas
