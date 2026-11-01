@@ -15,12 +15,13 @@ namespace adas
     }
     void ExecutorImpl::Execute(const std::string& commands) noexcept
     {
-        std::unordered_map<char, std::function<void(PoseHandler&)>> cmderMap;
-        cmderMap.emplace('M', MoveCommand());
-        cmderMap.emplace('L', TurnLeftCommand());
-        cmderMap.emplace('R', TurnRightCommand());
-        cmderMap.emplace('F', FastCommand());
-        cmderMap.emplace('B', ReverseCommand());
+        const std::unordered_map<char, std::function<void(PoseHandler&)>> cmderMap{
+            {'M', MoveCommand()},
+            {'L', TurnLeftCommand()},
+            {'R', TurnRightCommand()},
+            {'F', FastCommand()},
+            {'B', ReverseCommand()},
+        };
         for (const auto cmd : commands) {
             const auto it = cmderMap.find(cmd);
             if (it != cmderMap.end()) {
