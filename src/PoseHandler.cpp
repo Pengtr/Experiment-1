@@ -7,38 +7,39 @@ PoseHandler::PoseHandler(const Pose& pose) noexcept
 }
 void PoseHandler::Move() noexcept
 {
+    const int step = reverse ? -1 : 1;
     if (pose.heading == 'E') {
-        ++pose.x;
+        pose.x += step;
     } else if (pose.heading == 'W') {
-        --pose.x;
+        pose.x -= step;
     } else if (pose.heading == 'N') {
-        ++pose.y;
+        pose.y += step;
     } else if (pose.heading == 'S') {
-        --pose.y;
+        pose.y -= step;
     }
 }
 void PoseHandler::TurnLeft() noexcept
 {
     if (pose.heading == 'E') {
-        pose.heading = 'N';
+        pose.heading = reverse ? 'S' : 'N';
     } else if (pose.heading == 'N') {
-        pose.heading = 'W';
+        pose.heading = reverse ? 'E' : 'W';
     } else if (pose.heading == 'W') {
-        pose.heading = 'S';
+        pose.heading = reverse ? 'N' : 'S';
     } else if (pose.heading == 'S') {
-        pose.heading = 'E';
+        pose.heading = reverse ? 'W' : 'E';
     }
 }
 void PoseHandler::TurnRight() noexcept
 {
     if (pose.heading == 'E') {
-        pose.heading = 'S';
+        pose.heading = reverse ? 'N' : 'S';
     } else if (pose.heading == 'S') {
-        pose.heading = 'W';
+        pose.heading = reverse ? 'E' : 'W';
     } else if (pose.heading == 'W') {
-        pose.heading = 'N';
+        pose.heading = reverse ? 'S' : 'N';
     } else if (pose.heading == 'N') {
-        pose.heading = 'E';
+        pose.heading = reverse ? 'W' : 'E';
     }
 }
 void PoseHandler::Fast() noexcept
@@ -48,6 +49,14 @@ void PoseHandler::Fast() noexcept
 bool PoseHandler::IsFast() const noexcept
 {
     return fast;
+}
+void PoseHandler::Reverse() noexcept
+{
+    reverse = !reverse;
+}
+bool PoseHandler::IsReverse() const noexcept
+{
+    return reverse;
 }
 Pose PoseHandler::Query() const noexcept
 {
