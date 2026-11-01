@@ -1,5 +1,6 @@
 #pragma once
 #include "Executor.hpp"
+#include "Point.hpp"
 namespace adas
 {
 class PoseHandler final
@@ -20,7 +21,8 @@ public:
     Pose Query(void) const noexcept;
 
 private:
-    Pose pose;
+    Point point;
+    int heading;
     bool fast{false};
     bool reverse{false};
 };
