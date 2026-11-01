@@ -1,4 +1,5 @@
 #pragma once
+#include "PoseHandler.hpp"
 #include "Executor.hpp"
 namespace adas
 {
@@ -14,15 +15,7 @@ public:
     void Execute(const std::string& command) noexcept override;
     Pose Query(void) const noexcept override;
 
-public:
-    void Move(void) noexcept;
-    void TurnLeft(void) noexcept;
-    void TurnRight(void) noexcept;
-    void Fast(void) noexcept;
-    bool IsFast(void) const noexcept;
-
 private:
-    Pose pose;
-    bool fast{false};
+    PoseHandler poseHandler;
 };
 }  // namespace adas
