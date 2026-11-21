@@ -33,23 +33,15 @@ void PoseHandler::Backward() noexcept
 {
     point -= kOffsets[heading];
 }
-void PoseHandler::Move() noexcept
-{
-    if (reverse) {
-        Backward();
-    } else {
-        Forward();
-    }
-}
 void PoseHandler::TurnLeft() noexcept
 {
-    // 左转 = 编码 -1，倒车时方向取反
-    heading = (heading + (reverse ? 1 : 3)) % kHeadingCount;
+    // 左转 = 编码 -1
+    heading = (heading + 3) % kHeadingCount;
 }
 void PoseHandler::TurnRight() noexcept
 {
-    // 右转 = 编码 +1，倒车时方向取反
-    heading = (heading + (reverse ? 3 : 1)) % kHeadingCount;
+    // 右转 = 编码 +1
+    heading = (heading + 1) % kHeadingCount;
 }
 void PoseHandler::Fast() noexcept
 {

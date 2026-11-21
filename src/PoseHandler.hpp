@@ -13,7 +13,6 @@ public:
 public:
     void Forward(void) noexcept;
     void Backward(void) noexcept;
-    void Move(void) noexcept;
     void TurnLeft(void) noexcept;
     void TurnRight(void) noexcept;
     void Fast(void) noexcept;
