@@ -1,6 +1,6 @@
 #include "ExecutorImpl.hpp"
-#include "CmderFactory.hpp"
-#include "Singleton.hpp"
+#include "command/CmderFactory.hpp"
+#include "command/Singleton.hpp"
 #include <algorithm>
 #include <memory>
 namespace adas
