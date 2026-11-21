@@ -1,8 +1,31 @@
 #include "CmderFactory.hpp"
 namespace adas
 {
-CmderList CmderFactory::GetCmders(const std::string& commands) const noexcept
+CmderFactory::CmderFactory() noexcept
+    : cmderMaps{
+          BuildCmderMap(GetVehicleSpec(CarType::Normal)),
+          BuildCmderMap(GetVehicleSpec(CarType::SportsCar)),
+          BuildCmderMap(GetVehicleSpec(CarType::Bus)),
+      }
 {
+}
+
+CmderMap CmderFactory::BuildCmderMap(const VehicleSpec& spec) noexcept
+{
+    return {
+        {'M', MoveCommand(spec)},
+        {'L', TurnLeftCommand(spec)},
+        {'R', TurnRightCommand(spec)},
+        {'Z', TurnRoundCommand()},
+        {'F', FastCommand()},
+        {'B', ReverseCommand()},
+    };
+}
+
+CmderList CmderFactory::GetCmders(const std::string& commands, const CarType& carType) const noexcept
+{
+    const auto index = static_cast<std::size_t>(carType);
+    const auto& cmderMap = cmderMaps[index < cmderMaps.size() ? index : 0];
     CmderList cmders;
     for (const auto cmd : ParseCommandString(commands)) {
         const auto it = cmderMap.find(cmd);

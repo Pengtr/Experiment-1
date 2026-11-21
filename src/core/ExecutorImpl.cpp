@@ -15,7 +15,7 @@ namespace adas
     }
     void ExecutorImpl::Execute(const std::string& commands) noexcept
     {
-        const auto cmders = Singleton<CmderFactory>::Instance().GetCmders(commands);
+        const auto cmders = Singleton<CmderFactory>::Instance().GetCmders(commands, carType);
         std::for_each(cmders.begin(), cmders.end(), [this](const Cmder& cmder) noexcept {
             cmder(poseHandler).DoOperate(poseHandler);
         });
