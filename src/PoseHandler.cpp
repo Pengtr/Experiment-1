@@ -7,6 +7,9 @@ namespace
 constexpr char kHeadings[] = {'E', 'S', 'W', 'N'};
 constexpr int kHeadingCount = sizeof(kHeadings) / sizeof(kHeadings[0]);
 
+// 各朝向前进一格的向量，索引与朝向编码一致
+const Point kOffsets[] = {{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
+
 int ToHeadingIndex(const char heading) noexcept
 {
     for (int i = 0; i < kHeadingCount; ++i) {
@@ -22,14 +25,20 @@ PoseHandler::PoseHandler(const Pose& pose) noexcept
     : point(pose.x, pose.y), heading(ToHeadingIndex(pose.heading))
 {
 }
+void PoseHandler::Forward() noexcept
+{
+    point += kOffsets[heading];
+}
+void PoseHandler::Backward() noexcept
+{
+    point -= kOffsets[heading];
+}
 void PoseHandler::Move() noexcept
 {
-    // 各朝向前进一格的向量，索引与朝向编码一致
-    static const Point kOffsets[] = {{1, 0}, {0, -1}, {-1, 0}, {0, 1}};
     if (reverse) {
-        point -= kOffsets[heading];
+        Backward();
     } else {
-        point += kOffsets[heading];
+        Forward();
     }
 }
 void PoseHandler::TurnLeft() noexcept
