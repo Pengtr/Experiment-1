@@ -5,12 +5,12 @@
 #include <memory>
 namespace adas
 {
-    Executor* Executor::NewExecutor(const Pose& pose) noexcept
+    Executor* Executor::NewExecutor(const Pose& pose, const CarType& carType) noexcept
     {
-        return new (std::nothrow) ExecutorImpl(pose);
+        return new (std::nothrow) ExecutorImpl(pose, carType);
     }
-    ExecutorImpl::ExecutorImpl(const Pose& pose) noexcept
-        : poseHandler(pose)
+    ExecutorImpl::ExecutorImpl(const Pose& pose, const CarType& carType) noexcept
+        : poseHandler(pose), carType(carType)
     {
     }
     void ExecutorImpl::Execute(const std::string& commands) noexcept
